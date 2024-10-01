@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900; 1,100..900&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -21,7 +21,7 @@ html {
 body {
   color: #0f0f0f;
   line-height: normal;
-  font-family: Play;
+  font-family: Montserrat;
   font-size: 1rem;
   font-weight: 400;
   -ms-text-size-adjust: 100%;
@@ -33,7 +33,7 @@ body {
 button,
 input,
 textarea {
-  font-family: Play;
+  font-family: Montserrat;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
