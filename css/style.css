@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -21,7 +21,7 @@ html {
 body {
   color: #0f0f0f;
   line-height: normal;
-  font-family: Montserrat;
+  font-family: Play;
   font-size: 1rem;
   font-weight: 400;
   -ms-text-size-adjust: 100%;
@@ -33,7 +33,7 @@ body {
 button,
 input,
 textarea {
-  font-family: Montserrat;
+  font-family: Play;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
@@ -141,27 +141,27 @@ h3 {
 .navbar-tab__nav-item {
   font-size: 1.125rem;
   color: #686d76;
-  transition: .3s
+  transition: .5s
 }
 .navbar-tab__nav-item::after {
   content: "";
   width: 100%;
   height: 1px;
   background-color: #bababa;
-  transition: .3s
+  transition: .5s
 }
 .navbar-tab__nav-item:hover {
   color: #4b70f5;
-  transition: .3s
+  transition: .5s
 }
 .navbar-tab__nav-item:hover::after {
   background-color: #4b70f5;
-  transition: .3s
+  transition: .5s
 }
 .navbar-tab__nav-item.active {
   color: #4b70f5;
   font-weight: 600;
-  transition: .3s
+  transition: .5s
 }
 .navbar-tab__nav-item.active::after {
   background-color: #4b70f5
