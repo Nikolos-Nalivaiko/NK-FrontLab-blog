@@ -7792,52 +7792,6 @@
                 }
             }
         }
-        class CopyCode {
-            constructor(buttonSelector) {
-                this.buttons = document.querySelectorAll(buttonSelector);
-                this.init();
-            }
-            init() {
-                this.buttons.forEach((button => {
-                    button.addEventListener("click", (event => this.copyCode(event)));
-                }));
-            }
-            copyCode(event) {
-                const button = event.currentTarget;
-                const codeBlock = button.closest(".code-block").querySelector("code");
-                const icon = button.querySelector("svg use");
-                const svg = button.querySelector("svg");
-                if (codeBlock) {
-                    const range = document.createRange();
-                    range.selectNode(codeBlock);
-                    const selection = window.getSelection();
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                    try {
-                        const successful = document.execCommand("copy");
-                        if (successful) {
-                            svg.classList.add("hidden");
-                            setTimeout((() => {
-                                icon.setAttribute("xlink:href", "img/icons/icons.svg#check");
-                                svg.classList.remove("hidden");
-                                svg.classList.add("success");
-                            }), 300);
-                            setTimeout((() => {
-                                svg.classList.add("hidden");
-                                setTimeout((() => {
-                                    icon.setAttribute("xlink:href", "img/icons/icons.svg#copy");
-                                    svg.classList.remove("hidden");
-                                    svg.classList.remove("success");
-                                }), 300);
-                            }), 2e3);
-                        }
-                    } catch (err) {
-                        console.error("Помилка копіювання", err);
-                    }
-                    selection.removeAllRanges();
-                }
-            }
-        }
         const preloaderElement = document.getElementById("preloader");
         const contentElement = document.getElementById("content");
         const preloader = new Preloader(preloaderElement, contentElement);
@@ -7845,6 +7799,5 @@
             preloader.hide();
         };
         new Tabs(".tabs-container");
-        new CopyCode(".code-block__copy");
     })();
 })();
