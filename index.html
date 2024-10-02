@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20241002095441">
+	<link rel="stylesheet" href="css/style.min.css?_v=20241002100836">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -115,23 +115,23 @@
 					який поєднує в собі багатий функціонал.
 				</p>
 
-				<div class="tabs-container">
-					<div class="tab" data-target="#tab1">Tab 1</div>
-					<div class="tab" data-target="#tab2">Tab 2</div>
-					<div class="tab" data-target="#tab3">Tab 3</div>
-				</div>
-
 				<!-- <div class="tabs-container navbar-tab">
 						<div class="tab navbar-tab__nav-item" data-target="#tab1">Основні модулі</div>
 						<div class="tab navbar-tab__nav-item" data-target="#tab2">Стилізація</div>
 					</div> -->
 
+				<div class="tabs-container navbar-tab">
+					<div class="tab navbar-tab__nav-item" data-target="#tab1">Основні модулі</div>
+					<div class="tab navbar-tab__nav-item" data-target="#tab2">Стилізація</div>
+				</div>
+
 			</div>
 
 			<div class="__container_big">
-				<div id="tab1" class="tab-content">Container 1</div>
-				<div id="tab2" class="tab-content">Container 2</div>
-				<div id="tab3" class="tab-content">Container 3</div>
+				<div class="tab-wrapper navbar-tab__wrapper">
+					<div id="tab1" class="tab-content">Container 1</div>
+					<div id="tab2" class="tab-content">Container 2</div>
+				</div>
 			</div>
 
 			<!-- <div class="__container_big">
@@ -207,7 +207,7 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20241002095441"></script>
+	<script src="js/app.min.js?_v=20241002100836"></script>
 </body>
 
 </html>

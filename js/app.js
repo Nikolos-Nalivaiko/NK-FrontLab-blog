@@ -1,22 +1,5 @@
 (() => {
     "use strict";
-    class Preloader {
-        constructor(preloaderElement, contentElement) {
-            this.preloader = preloaderElement;
-            this.content = contentElement;
-        }
-        hide() {
-            this.preloader.style.opacity = "0";
-            setTimeout((() => {
-                this.preloader.style.display = "none";
-                this.content.style.display = "block";
-                setTimeout((() => {
-                    this.content.style.opacity = "1";
-                    document.body.style.overflow = "auto";
-                }), 50);
-            }), 1e3);
-        }
-    }
     class Tabs {
         constructor(tabContainer) {
             this.tabContainer = document.querySelector(tabContainer);
@@ -46,6 +29,23 @@
                 tab.classList.add("active");
                 targetContent.classList.add("active");
             }
+        }
+    }
+    class Preloader {
+        constructor(preloaderElement, contentElement) {
+            this.preloader = preloaderElement;
+            this.content = contentElement;
+        }
+        hide() {
+            this.preloader.style.opacity = "0";
+            setTimeout((() => {
+                this.preloader.style.display = "none";
+                this.content.style.display = "block";
+                setTimeout((() => {
+                    this.content.style.opacity = "1";
+                    document.body.style.overflow = "auto";
+                }), 50);
+            }), 1e3);
         }
     }
     const preloaderElement = document.getElementById("preloader");
