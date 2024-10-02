@@ -460,13 +460,6 @@ body.top-menu-open {
   color: #fff;
   transition: .3s
 }
-.swiperMain {
-  height: 250px
-}
-.swiperThumbs {
-  margin-top: 65px;
-  height: 150px
-}
 body::after {
   content: "";
   background-color: rgba(138,138,138,.3);
