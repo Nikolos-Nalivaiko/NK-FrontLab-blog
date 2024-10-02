@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20241002104805">
+	<link rel="stylesheet" href="css/style.min.css?_v=20241002111437">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -96,7 +96,7 @@
 
 			<div class="__container_small section__head">
 
-				<a href="/index.html">
+				<a href="index.html">
 					<img src="img/logo.svg" class="logo_main" alt="Image">
 				</a>
 
@@ -175,9 +175,19 @@ window.onload = function() {
 							<h2>Підключення у HTML</h2>
 
 							<p class="subsection__description">
-								В HTML після body потрібно підключити прелоадер через @@include, і додати id=«content» до класу
+								В HTML після body потрібно підключити прелоадер через @@include, і додати <b>id=«content»</b> до класу
 								обгортки або до контенту, який не потрібно відображати. Всі стилі прелоадера прописані в HTML шаблоні,
 								щоб уникнути явища FOUC
+							</p>
+
+						</div>
+
+						<div class="subsection">
+							<h2>Налаштування</h2>
+
+							<p class="subsection__description">
+								Повна HTML структура прелоадера та його стилізація знаходяться за шляхом <b>src/html/_preloader.html</b>
+								де можна налаштувати конструкцію та стилізацію.
 							</p>
 
 						</div>
@@ -201,7 +211,7 @@ window.onload = function() {
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20241002104805"></script>
+	<script src="js/app.min.js?_v=20241002111437"></script>
 </body>
 
 </html>

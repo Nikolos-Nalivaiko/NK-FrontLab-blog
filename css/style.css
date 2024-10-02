@@ -82,7 +82,7 @@ html {
 }
 body {
   color: #0f0f0f;
-  line-height: normal;
+  line-height: 1.4;
   font-family: Montserrat;
   font-size: 1rem;
   font-weight: 400;
