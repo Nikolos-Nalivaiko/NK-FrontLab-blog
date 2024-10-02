@@ -7,11 +7,12 @@
                 this.tabs = this.tabContainer.querySelectorAll(".tab");
                 this.tabContents = document.querySelectorAll(".tab-content");
                 if (this.tabs.length > 0 && this.tabContents.length > 0) this.init();
-            }
+            } else console.error("Tab container not found");
         }
         init() {
             const savedTabIndex = localStorage.getItem("activeTabIndex");
-            if (savedTabIndex) this.activateTab(this.tabs[savedTabIndex]); else this.activateTab(this.tabs[0]);
+            const validIndex = savedTabIndex && savedTabIndex < this.tabs.length ? savedTabIndex : 0;
+            this.activateTab(this.tabs[validIndex]);
             this.tabs.forEach(((tab, index) => {
                 tab.addEventListener("click", (event => this.switchTab(event, index)));
             }));
@@ -22,13 +23,17 @@
             localStorage.setItem("activeTabIndex", index);
         }
         activateTab(tab) {
+            if (!tab) {
+                console.error("Tab is undefined");
+                return;
+            }
             const targetContent = document.querySelector(tab.getAttribute("data-target"));
             if (targetContent) {
                 this.tabs.forEach((t => t.classList.remove("active")));
                 this.tabContents.forEach((c => c.classList.remove("active")));
                 tab.classList.add("active");
                 targetContent.classList.add("active");
-            }
+            } else console.error("Target content not found for tab:", tab);
         }
     }
     class Preloader {
