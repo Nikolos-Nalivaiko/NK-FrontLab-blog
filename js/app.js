@@ -9,7 +9,7 @@
             this.preloader.style.opacity = "0";
             setTimeout((() => {
                 this.preloader.style.display = "none";
-                this.content.style.display = "block";
+                this.content.style.display = "flex";
                 setTimeout((() => {
                     this.content.style.opacity = "1";
                     document.body.style.overflow = "auto";
@@ -18,8 +18,9 @@
         }
     }
     class Tabs {
-        constructor(tabContainer) {
+        constructor(tabContainer, saveActiveTab = false) {
             this.tabContainer = document.querySelector(tabContainer);
+            this.saveActiveTab = saveActiveTab;
             if (this.tabContainer) {
                 this.tabs = this.tabContainer.querySelectorAll(".tab");
                 this.tabContents = document.querySelectorAll(".tab-content");
@@ -27,7 +28,11 @@
             } else console.error("Tab container not found");
         }
         init() {
-            const savedTabIndex = localStorage.getItem("activeTabIndex");
+            let savedTabIndex = 0;
+            if (this.saveActiveTab) {
+                const storageKey = `activeTabIndex_${this.tabContainer.classList[1]}`;
+                savedTabIndex = localStorage.getItem(storageKey);
+            }
             const validIndex = savedTabIndex && savedTabIndex < this.tabs.length ? savedTabIndex : 0;
             this.activateTab(this.tabs[validIndex]);
             this.tabs.forEach(((tab, index) => {
@@ -37,19 +42,25 @@
         switchTab(event, index) {
             const targetTab = event.target;
             this.activateTab(targetTab);
-            localStorage.setItem("activeTabIndex", index);
+            if (this.saveActiveTab) {
+                const storageKey = `activeTabIndex_${this.tabContainer.classList[1]}`;
+                localStorage.setItem(storageKey, index);
+            }
         }
         activateTab(tab) {
             if (!tab) {
                 console.error("Tab is undefined");
                 return;
             }
-            const targetContent = document.querySelector(tab.getAttribute("data-target"));
+            const targetId = tab.getAttribute("data-target");
+            const targetContent = document.querySelector(targetId);
             if (targetContent) {
                 this.tabs.forEach((t => t.classList.remove("active")));
                 this.tabContents.forEach((c => c.classList.remove("active")));
                 tab.classList.add("active");
-                targetContent.classList.add("active");
+                setTimeout((() => {
+                    targetContent.classList.add("active");
+                }), 400);
             } else console.error("Target content not found for tab:", tab);
         }
     }
@@ -105,6 +116,6 @@
     window.onload = function() {
         preloader.hide();
     };
-    new Tabs(".tabs-container");
+    new Tabs(".navbar-tab", false);
     new CopyCode(".code-block__copy");
 })();

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Home Page</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20241004133830">
+	<link rel="shortcut icon" href="favicon.ico">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+	<style>
+		body {
+			overflow: hidden;
+		}
+
+		#preloader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			z-index: 9999;
+			opacity: 1;
+			transition: opacity 1s ease;
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+
+		/* Логотип */
+		.preloader-logo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: 55px;
+
+			img {
+				width: 190px;
+
+				@media (max-width: 479px) {
+					width: 200px;
+				}
+			}
+		}
+
+		#content {
+			opacity: 0;
+			transition: opacity 0.8s ease;
+		}
+
+		.loader {
+			height: 5px;
+			width: 200px;
+			--c: no-repeat linear-gradient(#4B70F5 0 0);
+			background: var(--c), var(--c), #dbdbdb;
+			background-size: 60% 100%;
+			animation: l16 3s infinite;
+		}
+
+		@keyframes l16 {
+			0% {
+				background-position: -150% 0, -150% 0
+			}
+
+			66% {
+				background-position: 250% 0, -150% 0
+			}
+
+			100% {
+				background-position: 250% 0, 250% 0
+			}
+		}
+	</style>
+
+
+	<div id="preloader">
+		<div class="preloader-logo">
+			<img src="img/logo.svg" alt="Logo">
+		</div>
+		<div class="loader"></div>
+	</div>
+
+	<div class="wrapper" id="content">
+		<main class="main">
+
+			<div class="__container_small section__head">
+
+				<a href="index.html">
+					<img src="img/logo.svg" class="logo_main" alt="Image">
+				</a>
+
+				<h1 class="headline">
+					Таби
+					<svg class="icon">
+						<use xlink:href="img/icons/icons.svg#tabs"></use>
+					</svg>
+				</h1>
+
+				<p class="description">
+					Цей модуль реалізує функціональність вкладок (tabs) на вебсторінці, дозволяючи користувачу перемикатися
+					між різними секціями контенту. Клас Tabs надає можливість як автоматичного збереження активної вкладки в
+					localStorage, так і базове перемикання вкладок без збереження.
+				</p>
+
+				<ul class="tabs-container navbar-tab">
+					<li class="tab navbar-tab__nav-item" data-target="#tab1">JavaScript</li>
+					<li class="tab navbar-tab__nav-item" data-target="#tab2">HTML</li>
+				</ul>
+
+				<div class="tab-wrapper">
+
+					<div id="tab1" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>Підключення модуля JS</h2>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>import Tabs from "./components/tabs.js";</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="subsection">
+
+							<h2>Створення табу</h2>
+
+							<p class="subsection__description">
+								<b>.navbar-tab</b> - Назва табу, другий параметр <b>true</b> - дозволояє збереження активної вкладки у
+								localstorage, <b>false</b> - забороняє (по дефолту)
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>const tabs = new Tabs('.navbar-tab', false);</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div id="tab2" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>HTML структура</h2>
+
+							<p class="subsection__description">
+								Для пунктів навігації потрібно додати <b>data-target</b>, де вказати id блоку контенту який потрібно
+								відкрити при натисканні на цей пункт. Блоку контенту потрібно відповідно додати id
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>&lt;div class="tab__navbar"&gt;
+    &lt;div class="tab" data-target="#tab1"&gt;Tab 1&lt;/div&gt;
+    &lt;div class="tab" data-target="#tab2"&gt;Tab 2&lt;/div&gt;
+    &lt;div class="tab" data-target="#tab3"&gt;Tab 3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="tab__navbar-wrapper"&gt;
+    &lt;div id="tab1" class="tab-content"&gt;Container-1&lt;/div&gt;
+    &lt;div id="tab2" class="tab-content"&gt;Container-2&lt;/div&gt;
+    &lt;div id="tab3" class="tab-content"&gt;Container-3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</main>
+		<footer class="footer">
+			<div class="__container_big">
+				<div class="footer__inner">
+					<a href="/index.html">
+						<img src="img/logo.svg" class="footer__logo" alt="Image">
+					</a>
+					<span>NK FrontLab © 2024</span>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="js/app.min.js?_v=20241004133830"></script>
+</body>
+
+</html>

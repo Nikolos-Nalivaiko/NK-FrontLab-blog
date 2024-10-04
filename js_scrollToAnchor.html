@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20241002223929">
+	<link rel="stylesheet" href="css/style.min.css?_v=20241004133830">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -101,9 +101,9 @@
 				</a>
 
 				<h1 class="headline">
-					Свайпер
+					Скрол по кліку
 					<svg class="icon">
-						<use xlink:href="img/icons/icons.svg#swiper"></use>
+						<use xlink:href="img/icons/icons.svg#anchor"></use>
 					</svg>
 				</h1>
 
@@ -128,7 +128,7 @@
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>import SwiperComponent from './components/swiper.js';</code></pre>
+								<pre class="code-block__code"><code>import ScrollToAnchor from "./components/scrollToAnchor.js";</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -144,120 +144,23 @@
 
 						<div class="subsection">
 
-							<h2>Створення свайперу</h2>
+							<h2>Створення нового модульного вікна</h2>
 
 							<p class="subsection__description">
-								Таким чином створюється свайпер із заданням необхідних параметрів, для дочірного свайперу
-								треба писати SwiperThumbs.swiperInstance, де <i>SwiperThumbs</i> - назва створеного дочірного свайпера,
-								а <i>.swiperInstance</i> - для коректної роботи та взаємодії між ними
+							<p>
+								<b>behavior: 'smooth'</b> - Плавний перехід до блоку
+							</p>
+							<p>
+								<b>offset</b> - Значення відступу вверх (скільки потрібно не докрутити до блоку)
+							</p>
 							</p>
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>const SwiperMain = new SwiperComponent('.swiperMain', {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    speed: 1200,
-    autoplay: {
-        delay: 5000,
-    },
-    navigation: {
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-    },
-
-    thumbs: {
-        swiper: SwiperThumbs.swiperInstance,
-    },
+								<pre class="code-block__code"><code>const scrollToAnchorLater = new ScrollToAnchor('.scroll-link', {
+    behavior: 'smooth',
+    offset: 50 
 });</code></pre>
-
-								<div class="code-block__aside">
-									<button class="code-block__copy code-block__btn">
-										<svg class="icon code-block__icon">
-											<use xlink:href="img/icons/icons.svg#copy"></use>
-										</svg>
-									</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="subsection">
-
-							<h2>Зміна свайперу по кліку</h2>
-
-							<p class="subsection__description">
-								При кліку на якийсь елемент (або якійсь іншій події) можна динамічно змінювати свайпер,
-								а саме змінювати налаштування
-							</p>
-
-							<div class="code-block">
-								<pre class="code-block__code"><code>document.querySelector('#update-button').addEventListener('click', () => {
-    SwiperMain.updateOptions({
-        slidesPerView: 2,
-        spaceBetween: 10,
-        // інші налаштування
-    });
-});</code></pre>
-								<div class="code-block__aside">
-									<button class="code-block__copy code-block__btn">
-										<svg class="icon code-block__icon">
-											<use xlink:href="img/icons/icons.svg#copy"></use>
-										</svg>
-									</button>
-								</div>
-							</div>
-
-						</div>
-
-						<div class="subsection">
-
-							<h2>Видалення свайперу по кліку</h2>
-
-							<p class="subsection__description">
-								При кліку на якийсь елемент (або якійсь іншій події) можна динамічно "зруйнувати" свайпер
-							</p>
-
-							<div class="code-block">
-								<pre class="code-block__code"><code>document.querySelector('#destroy-button').addEventListener('click', () => {
-    SwiperMain.destroy();
-    SwiperThumbs.destroy();
-});</code></pre>
-								<div class="code-block__aside">
-									<button class="code-block__copy code-block__btn">
-										<svg class="icon code-block__icon">
-											<use xlink:href="img/icons/icons.svg#copy"></use>
-										</svg>
-									</button>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-					<div id="tab2" class="tab-content">
-
-						<div class="subsection">
-							<h2>HTML структура свайперу</h2>
-
-							<div class="code-block">
-
-								<pre class="code-block__code"><code>&lt;div class="swiper-container swiperMain"&gt;
-    &lt;div class="swiper-wrapper"&gt;
-        &lt;div class="swiper-slide"&gt;
-            &lt;p&gt;Slide 1&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="swiper-slide"&gt;
-            &lt;p&gt;Slide 2&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="swiper-slide"&gt;
-            &lt;p&gt;Slide 3&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="swiper-slide"&gt;
-            &lt;p&gt;Slide 4&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -273,6 +176,57 @@
 
 					</div>
 
+					<div id="tab2" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>HTML структура</h2>
+
+							<p class="subsection__description">
+								Для навігації треба задати клас <b>scroll-link</b> і посилання на блок
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>&lt;li&gt;
+    &lt;a href="/index.html#section1" class="scroll-link"&gt;
+        Nav-Item #1
+    &lt;/a&gt;
+&lt;/li&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+							<p class="subsection__description">
+								Для блоку задається ідентифікатор, з яким зв'язується посилання
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>&lt;section id="section3"&gt;
+    Section 3 Content
+&lt;section&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
 				</div>
 
 
@@ -285,12 +239,12 @@
 					<a href="/index.html">
 						<img src="img/logo.svg" class="footer__logo" alt="Image">
 					</a>
-					<span>NK FrontLab©2024</span>
+					<span>NK FrontLab © 2024</span>
 				</div>
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20241002223929"></script>
+	<script src="js/app.min.js?_v=20241004133830"></script>
 </body>
 
 </html>

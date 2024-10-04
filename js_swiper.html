@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20241002223929">
+	<link rel="stylesheet" href="css/style.min.css?_v=20241004133830">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -101,9 +101,9 @@
 				</a>
 
 				<h1 class="headline">
-					Модульні вікна
+					Свайпер
 					<svg class="icon">
-						<use xlink:href="img/icons/icons.svg#popup"></use>
+						<use xlink:href="img/icons/icons.svg#swiper"></use>
 					</svg>
 				</h1>
 
@@ -128,7 +128,7 @@
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>import Popup from "./components/popups.js";</code></pre>
+								<pre class="code-block__code"><code>import SwiperComponent from './components/swiper.js';</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -144,24 +144,32 @@
 
 						<div class="subsection">
 
-							<h2>Створення нового модульного вікна</h2>
+							<h2>Створення свайперу</h2>
 
 							<p class="subsection__description">
-								По кліку на кнопку буде відкриватись модульне вікно яке має id за яким ініціалізовано popup
-								(можна ініціалізувати одразу декілька модульних вікон)
+								Таким чином створюється свайпер із заданням необхідних параметрів, для дочірного свайперу
+								треба писати SwiperThumbs.swiperInstance, де <i>SwiperThumbs</i> - назва створеного дочірного свайпера,
+								а <i>.swiperInstance</i> - для коректної роботи та взаємодії між ними
 							</p>
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>const popup = new Popup('#popup');
+								<pre class="code-block__code"><code>const SwiperMain = new SwiperComponent('.swiperMain', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    speed: 1200,
+    autoplay: {
+        delay: 5000,
+    },
+    navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+    },
 
-    const openPopupButtons = document.querySelectorAll('.open-popup');
-    
-    openPopupButtons.forEach(button => {
-       button.addEventListener('click', () => {
-           popup.openModal();
-       });
-    });</code></pre>
+    thumbs: {
+        swiper: SwiperThumbs.swiperInstance,
+    },
+});</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -170,7 +178,57 @@
 										</svg>
 									</button>
 								</div>
+							</div>
+						</div>
 
+						<div class="subsection">
+
+							<h2>Зміна свайперу по кліку</h2>
+
+							<p class="subsection__description">
+								При кліку на якийсь елемент (або якійсь іншій події) можна динамічно змінювати свайпер,
+								а саме змінювати налаштування
+							</p>
+
+							<div class="code-block">
+								<pre class="code-block__code"><code>document.querySelector('#update-button').addEventListener('click', () => {
+    SwiperMain.updateOptions({
+        slidesPerView: 2,
+        spaceBetween: 10,
+        // інші налаштування
+    });
+});</code></pre>
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="subsection">
+
+							<h2>Видалення свайперу по кліку</h2>
+
+							<p class="subsection__description">
+								При кліку на якийсь елемент (або якійсь іншій події) можна динамічно "зруйнувати" свайпер
+							</p>
+
+							<div class="code-block">
+								<pre class="code-block__code"><code>document.querySelector('#destroy-button').addEventListener('click', () => {
+    SwiperMain.destroy();
+    SwiperThumbs.destroy();
+});</code></pre>
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
 							</div>
 
 						</div>
@@ -180,28 +238,23 @@
 					<div id="tab2" class="tab-content">
 
 						<div class="subsection">
-
-							<h2>HTML структура</h2>
-
-							<p class="subsection__description">
-								Для підключення модульного вікна потрібно використовувати @@include
-							</p>
+							<h2>HTML структура свайперу</h2>
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>&lt;div class="popup" id="popup_first"&gt;
-    &lt;div class="popup__wrapper"&gt;
-
-        &lt;div class="popup__content"&gt;
-
-            &lt;button data-close type="button" class="popup__close"&gt;
-                &lt;svg&gt;
-                    &lt;use xlink:href="img/icons/icons.svg#close"&gt;&lt;/use&gt;
-                &lt;/svg&gt;
-            &lt;/button&gt;
-
-            <i>Контент</i>
-
+								<pre class="code-block__code"><code>&lt;div class="swiper-container swiperMain"&gt;
+    &lt;div class="swiper-wrapper"&gt;
+        &lt;div class="swiper-slide"&gt;
+            &lt;p&gt;Slide 1&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="swiper-slide"&gt;
+            &lt;p&gt;Slide 2&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="swiper-slide"&gt;
+            &lt;p&gt;Slide 3&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="swiper-slide"&gt;
+            &lt;p&gt;Slide 4&lt;/p&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -232,12 +285,12 @@
 					<a href="/index.html">
 						<img src="img/logo.svg" class="footer__logo" alt="Image">
 					</a>
-					<span>NK FrontLab©2024</span>
+					<span>NK FrontLab © 2024</span>
 				</div>
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20241002223929"></script>
+	<script src="js/app.min.js?_v=20241004133830"></script>
 </body>
 
 </html>

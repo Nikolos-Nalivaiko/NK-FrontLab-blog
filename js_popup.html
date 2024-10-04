@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20241002223929">
+	<link rel="stylesheet" href="css/style.min.css?_v=20241004133830">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -101,16 +101,16 @@
 				</a>
 
 				<h1 class="headline">
-					Прелоадер
+					Модульні вікна
 					<svg class="icon">
-						<use xlink:href="img/icons/icons.svg#preloader"></use>
+						<use xlink:href="img/icons/icons.svg#popup"></use>
 					</svg>
 				</h1>
 
 				<p class="description">
-					Легкий та зручний модуль для відображення анімації завантаження під час завантаження веб-сторінки або
-					важливого контенту. Модуль допомагає покращити користувацький досвід, показуючи індикатор завантаження
-					до моменту, коли вся сторінка або її частини будуть повністю готові для взаємодії
+					Цей модуль SwiperComponent призначений для створення, конфігурації та управління слайдерами за допомогою
+					бібліотеки Swiper. Він дозволяє гнучко ініціалізувати слайдер на будь-якому елементі, передаючи параметри
+					за замовчуванням або кастомізовані налаштування.
 				</p>
 
 				<ul class="tabs-container navbar-tab">
@@ -123,11 +123,12 @@
 					<div id="tab1" class="tab-content">
 
 						<div class="subsection">
+
 							<h2>Підключення модуля JS</h2>
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>import Preloader from "./components/preloader.js";</code></pre>
+								<pre class="code-block__code"><code>import Popup from "./components/popups.js";</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -142,18 +143,25 @@
 						</div>
 
 						<div class="subsection">
-							<h2>Ініціалізація модуля</h2>
+
+							<h2>Створення нового модульного вікна</h2>
+
+							<p class="subsection__description">
+								По кліку на кнопку буде відкриватись модульне вікно яке має id за яким ініціалізовано popup
+								(можна ініціалізувати одразу декілька модульних вікон)
+							</p>
 
 							<div class="code-block">
 
-								<pre class="code-block__code"><code>const preloaderElement = document.getElementById('preloader');
-const contentElement = document.getElementById('content');
+								<pre class="code-block__code"><code>const popup = new Popup('#popup');
 
-const preloader = new Preloader(preloaderElement, contentElement);
-
-window.onload = function() {
-    preloader.hide();
-};</code></pre>
+    const openPopupButtons = document.querySelectorAll('.open-popup');
+    
+    openPopupButtons.forEach(button => {
+       button.addEventListener('click', () => {
+           popup.openModal();
+       });
+    });</code></pre>
 
 								<div class="code-block__aside">
 									<button class="code-block__copy code-block__btn">
@@ -172,28 +180,45 @@ window.onload = function() {
 					<div id="tab2" class="tab-content">
 
 						<div class="subsection">
-							<h2>Підключення у HTML</h2>
+
+							<h2>HTML структура</h2>
 
 							<p class="subsection__description">
-								В HTML після body потрібно підключити прелоадер через @@include, і додати <b>id=«content»</b> до класу
-								обгортки або до контенту, який не потрібно відображати. Всі стилі прелоадера прописані в HTML шаблоні,
-								щоб уникнути явища FOUC
+								Для підключення модульного вікна потрібно використовувати @@include
 							</p>
 
-						</div>
+							<div class="code-block">
 
-						<div class="subsection">
-							<h2>Налаштування</h2>
+								<pre class="code-block__code"><code>&lt;div class="popup" id="popup_first"&gt;
+    &lt;div class="popup__wrapper"&gt;
 
-							<p class="subsection__description">
-								Повна HTML структура прелоадера та його стилізація знаходяться за шляхом <b>src/html/_preloader.html</b>
-								де можна налаштувати конструкцію та стилізацію.
-							</p>
+        &lt;div class="popup__content"&gt;
+
+            &lt;button data-close type="button" class="popup__close"&gt;
+                &lt;svg&gt;
+                    &lt;use xlink:href="img/icons/icons.svg#close"&gt;&lt;/use&gt;
+                &lt;/svg&gt;
+            &lt;/button&gt;
+
+            <i>Контент</i>
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
 
 						</div>
 
 					</div>
-
 				</div>
 
 
@@ -206,12 +231,12 @@ window.onload = function() {
 					<a href="/index.html">
 						<img src="img/logo.svg" class="footer__logo" alt="Image">
 					</a>
-					<span>NK FrontLab©2024</span>
+					<span>NK FrontLab © 2024</span>
 				</div>
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20241002223929"></script>
+	<script src="js/app.min.js?_v=20241004133830"></script>
 </body>
 
 </html>

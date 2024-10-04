@@ -204,7 +204,8 @@ h3 {
   font-size: 1.125rem;
   color: #686d76;
   transition: .5s;
-  font-weight: 600
+  font-weight: 600;
+  cursor: pointer
 }
 .navbar-tab__nav-item::after {
   content: "";
@@ -287,6 +288,9 @@ h3 {
 }
 .subsection__description {
   margin-top: 20px
+}
+.inner-link {
+  color: #4b70f5
 }
 .top-menu {
   position: fixed;
@@ -542,18 +546,21 @@ body::after {
   transition: .3s
 }
 .tab {
-  cursor: pointer
+  transition: opacity .4s ease
 }
 .tab-content {
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: opacity .5s ease
+  transition: opacity .4s ease,max-height .4s ease
 }
 .tab-content.active {
   opacity: 1;
-  max-height: 100%;
-  transition-delay: .2s
+  max-height: 100%
+}
+.tab-content:not(.active) {
+  opacity: 0;
+  max-height: 0
 }
 .preview-item {
   position: relative;
@@ -1109,11 +1116,11 @@ img.lazy.loaded {
   .navbar-tab {
     gap: 4.6875rem
   }
-  .navbar-tab__wrapper {
-    margin-top: 3.125rem
-  }
   .navbar-tab__content {
     gap: 1.875rem
+  }
+  .navbar-tab__content {
+    margin-top: 3.125rem
   }
   .navbar-tab__block {
     height: 12.5rem
@@ -1215,11 +1222,11 @@ img.lazy.loaded {
   .navbar-tab {
     gap: 2.1875rem
   }
-  .navbar-tab__wrapper {
-    margin-top: 2.5rem
-  }
   .navbar-tab__content {
     gap: 1.5625rem
+  }
+  .navbar-tab__content {
+    margin-top: 2.5rem
   }
   .navbar-tab__block {
     height: 9.6875rem
@@ -1403,11 +1410,11 @@ img.lazy.loaded {
   .navbar-tab {
     gap: clamp(2.1875rem ,1.3453947368rem + 4.2105263158vw ,4.6875rem)
   }
-  .navbar-tab__wrapper {
-    margin-top: clamp(2.5rem ,2.2894736842rem + 1.0526315789vw ,3.125rem)
-  }
   .navbar-tab__content {
     gap: clamp(1.5625rem ,1.4572368421rem + .5263157895vw ,1.875rem)
+  }
+  .navbar-tab__content {
+    margin-top: clamp(2.5rem ,2.2894736842rem + 1.0526315789vw ,3.125rem)
   }
   .navbar-tab__block {
     height: clamp(9.6875rem ,8.7401315789rem + 4.7368421053vw ,12.5rem)

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Home Page</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20241004133830">
+	<link rel="shortcut icon" href="favicon.ico">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?_v=20240826114116"></script>
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+	<style>
+		body {
+			overflow: hidden;
+		}
+
+		#preloader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			z-index: 9999;
+			opacity: 1;
+			transition: opacity 1s ease;
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+
+		/* Логотип */
+		.preloader-logo {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: 55px;
+
+			img {
+				width: 190px;
+
+				@media (max-width: 479px) {
+					width: 200px;
+				}
+			}
+		}
+
+		#content {
+			opacity: 0;
+			transition: opacity 0.8s ease;
+		}
+
+		.loader {
+			height: 5px;
+			width: 200px;
+			--c: no-repeat linear-gradient(#4B70F5 0 0);
+			background: var(--c), var(--c), #dbdbdb;
+			background-size: 60% 100%;
+			animation: l16 3s infinite;
+		}
+
+		@keyframes l16 {
+			0% {
+				background-position: -150% 0, -150% 0
+			}
+
+			66% {
+				background-position: 250% 0, -150% 0
+			}
+
+			100% {
+				background-position: 250% 0, 250% 0
+			}
+		}
+	</style>
+
+
+	<div id="preloader">
+		<div class="preloader-logo">
+			<img src="img/logo.svg" alt="Logo">
+		</div>
+		<div class="loader"></div>
+	</div>
+
+	<div class="wrapper" id="content">
+		<main class="main">
+
+			<div class="__container_small section__head">
+
+				<a href="index.html">
+					<img src="img/logo.svg" class="logo_main" alt="Image">
+				</a>
+
+				<h1 class="headline">
+					Показ файлів
+					<svg class="icon">
+						<use xlink:href="img/icons/icons.svg#previewer"></use>
+					</svg>
+				</h1>
+
+				<p class="description">
+					Модуль ImagePreviewer призначений для роботи з попереднім переглядом зображень, які користувач
+					завантажує через форму, вже відображених фотографій з бази даних, а також для сортування і видалення
+					цих зображень.
+				</p>
+
+				<ul class="tabs-container navbar-tab">
+					<li class="tab navbar-tab__nav-item" data-target="#tab1">JavaScript</li>
+					<li class="tab navbar-tab__nav-item" data-target="#tab2">HTML</li>
+					<li class="tab navbar-tab__nav-item" data-target="#tab3">Laravel</li>
+				</ul>
+
+				<div class="tab-wrapper">
+
+					<div id="tab1" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>Підключення модуля JS</h2>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>import ImagePreviewer from "./components/imagePreviewer.js";</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="subsection">
+
+							<h2>Ініціалізація модуля</h2>
+
+							<p class="subsection__description">
+								Об'єкт приймає id (input file) а також id контейнера куди виводяться фото, які завантажуються
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>new ImagePreviewer('#fileInput', '#previewContainer');</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div id="tab2" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>HTML структура</h2>
+
+							<p class="subsection__description">
+								В HTML потрібно додати два прихованих поля:
+								<b>image_order</b> - Відповідає за оновлення порядку фото,
+								<b>delete_images</b> - Містить зображення, які потрібно видалити. <br>
+								Структуру input file взято з модуля SCSS про <a href="scss_input-file.html" class="inner-link">кастомний Input File</a>
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>&lt;div class="file__wrapper"&gt;
+    &lt;input type="file" name="files[]" id="fileInput" class="file__input" multiple accept="image.webp,image.webp, image.webp,image/webp"/&gt;
+    &lt;input type="hidden" name="image_order" value=""&gt;
+    &lt;input type="hidden" name="delete_images" value=""&gt;
+    &lt;label for="fileInput" class="file__label"&gt;
+        &lt;svg class="icon"&gt;
+            &lt;use xlink:href="img/icons/icons.svg#upload"&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+          &lt;span class="file__button"&gt;Завантажити фото&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+&lt;/div id="previewContainer"&gt;&lt;/div&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="subsection">
+
+							<h2>HTML структура зображень, для виведення в ручну або з БД</h2>
+
+							<p class="subsection__description">
+								Назва файлу виводиться у <b>data-filename</b>, структура .image-wrapper потрібна для роботи модуля
+								<a href="js_lazy-load.html" class="inner-link">Завантаження фото</a>
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>&lt;div class="preview-item" data-filename="skoda.webp"&gt;
+    &lt;div class="image-wrapper"&gt;
+        &lt;img class="lazy preview-image" data-src="img/skoda.webp" alt="Image"&gt;
+    &lt;/div&gt;
+    &lt;svg class="remove-image"&gt;
+        &lt;use xlink:href="img/icons/icons.svg#close"&gt;&lt;/use&gt;
+    &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div id="tab3" class="tab-content">
+
+						<div class="subsection">
+
+							<h2>Робота з зображеннями на Backend</h2>
+
+							<p class="subsection__description">
+								<b>image_order</b> та <b>delete_images</b> конвертують з JSON в масиви.
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>$imageOrder = json_decode($validated['image_order'], true) ?? [];
+$deletedImages = json_decode($validated['delete_images'], true) ?? [];</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+							<p class="subsection__description">
+								Якщо у списку є зображення, які потрібно видалити, виконується запит до бази даних,
+								щоб отримати зображення, які потрібно видалити (фільтр за назвою файлу та car_id).
+								Кожне зображення видаляється з диска (перевіряється існування файлу),
+								а запис видаляється з бази даних.
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>if (!empty($deletedImages)) {
+    $imagesToDelete = Image::whereIn('filename', $deletedImages)
+        ->where('car_id', $car->id)
+        ->get();
+
+    foreach ($imagesToDelete as $image) {
+                
+        if (Storage::disk('public')->exists($image->path)) {
+            Storage::disk('public')->delete($image->path);
+        } 
+
+        $image->delete();
+
+        }
+    }</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+							<p class="subsection__description">
+							<p>
+								Створюється колекція завантажених файлів з поля перевірених файлів. Створюється масив для зображень,
+								які потрібно оновити.
+							</p>
+							<br>
+							<p>
+								Для кожного запису в image_order перевіряється, чи існує зображення в базі даних за допомогою
+								<b>Image::where('filename', $filename)</b>. Якщо зображення існує, його потрібно оновити, тому воно
+								додається до масиву <b>imagesToUpdate</b>. Якщо зображення не існує, шукається відповідний файл у полях запиту.
+								Файл зберігається на диску, а інформація про нове зображення додається до бази даних.
+							</p>
+							<br>
+							<p>
+								Після обробки всіх зображень масив <b>imagesToUpdate</b> використовується для оновлення порядку зображень
+								у базі даних.
+							</p>
+							</p>
+
+							<div class="code-block">
+
+								<pre class="code-block__code"><code>$files = collect($validated['files'] ?? []);
+    $imagesToUpdate = [];
+    
+        foreach($imageOrder as $fileData) {
+            $filename = $fileData['filename'];
+            $order = $fileData['order'];
+    
+            $image = Image::where('filename', $filename)->first();
+    
+            if($image) {
+                $imagesToUpdate[] = [
+                    'id' => $image->id,
+                    'order' => $order
+                ];
+            } else {
+    
+            $file = $files->first(function ($file) use ($filename) {
+                return $file->getClientOriginalName() === $filename;
+            });
+    
+            if($file) {
+                $path = $file->store('cars_image', 'public');
+    
+                Image::create([
+                    'car_id' => $car->id,
+                    'path' => $path,
+                    'filename' => $filename,
+                    'mime_type' => $file->getMimeType(),
+                    'size' => $file->getSize(),
+                    'order' => $order,
+                ]);
+            }
+        }
+    
+        if(!empty($imagesToUpdate)) {
+            foreach($imagesToUpdate as $data) {
+                Image::where('id', $data['id'])->update(['order' => $data['order']]);
+            }
+        }
+    }
+    
+        foreach ($imagesToUpdate as $data) {
+            Image::where('id', $data['id'])->update(['order' => $data['order']]);
+        }</code></pre>
+
+								<div class="code-block__aside">
+									<button class="code-block__copy code-block__btn">
+										<svg class="icon code-block__icon">
+											<use xlink:href="img/icons/icons.svg#copy"></use>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</main>
+		<footer class="footer">
+			<div class="__container_big">
+				<div class="footer__inner">
+					<a href="/index.html">
+						<img src="img/logo.svg" class="footer__logo" alt="Image">
+					</a>
+					<span>NK FrontLab © 2024</span>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="js/app.min.js?_v=20241004133830"></script>
+</body>
+
+</html>
